@@ -28,7 +28,20 @@ function Home() {
         <div className="absolute -top-24 left-1/2 -z-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-primary-glow/20 blur-3xl animate-orbit-pulse" />
         <div className="container-page pt-16 pb-20 sm:pt-20 sm:pb-24 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated px-3 py-1 text-xs font-medium text-muted-foreground animate-fade-in-up">
+            <div className="animate-fade-in-up">
+              <div
+                className="inline-flex justify-center lg:justify-start gap-2 sm:gap-3 md:gap-4 font-display text-3xl sm:text-4xl lg:text-5xl font-bold uppercase"
+                aria-label="VYRAPATH"
+              >
+                {"VYRAPATH".split("").map((letter, i) => (
+                  <span key={i} className="text-gradient">
+                    {letter}
+                  </span>
+                ))}
+              </div>
+              <div className="mx-auto lg:mx-0 mt-3 h-px w-full max-w-xs bg-gradient-to-r from-primary via-accent to-transparent opacity-70" />
+            </div>
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated px-3 py-1 text-xs font-medium text-muted-foreground animate-fade-in-up">
               <Sparkles className="h-3.5 w-3.5 text-accent" />
               500+ interview schedules delivered
             </div>
