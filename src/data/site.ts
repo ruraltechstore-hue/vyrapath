@@ -19,7 +19,7 @@ export const images = {
   heroMain: "/images/hero-indian-professional.png",
   heroSecondary: "/images/hero-secondary-indian.png",
   celebrate: U("photo-1523240795612-9a054b0db644", 1600),
-  workspace: U("photo-1600880292203-757bb62b4baf", 1400),
+  workspace: U("photo-1577962917302-cd874c4e31d2", 1400),
   team: U("photo-1522071820081-009f0129c71c", 1400),
   support: U("photo-1573496359142-b8d87734a5a2", 1000),
   interview: U("photo-1573496359142-b8d87734a5a2", 1200),
@@ -34,6 +34,13 @@ export const contactInfo = {
   phones: ["+91 63019 87060", "+91 79974 74891"] as const,
   address: "Madhapur, Hyderabad",
 };
+
+export const serviceRegions = [
+  { name: "USA", code: "us" },
+  { name: "UK", code: "gb" },
+  { name: "Ireland", code: "ie" },
+  { name: "Germany", code: "de" },
+] as const;
 
 export const services: Service[] = [
   {

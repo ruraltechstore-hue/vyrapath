@@ -64,7 +64,7 @@ export function OutcomeMailCard({ proof, className, style }: OutcomeMailCardProp
             To: <Redacted>student.fresher@email.com</Redacted>
           </div>
           <div>
-            Re: <Redacted>{proof.role} · {proof.domain}</Redacted>
+            Re: <Redacted>{`${proof.role} · ${proof.domain}`}</Redacted>
           </div>
         </div>
       </div>

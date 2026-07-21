@@ -3,3 +3,5 @@ Allow: /
 Disallow: /privacy
 Disallow: /terms
 Disallow: /refund
+
+Sitemap: https://vyrapath.com/sitemap.xml

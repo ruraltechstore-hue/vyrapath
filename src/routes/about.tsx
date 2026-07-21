@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/layout/PageHero";
+import { ServiceRegionsMap } from "@/components/about/ServiceRegionsMap";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { stats, images } from "@/data/site";
@@ -43,7 +44,7 @@ function AboutPage() {
         <div className="container-page grid gap-10 lg:grid-cols-2 lg:items-center">
           <div className="relative">
             <div className="relative aspect-[5/4] rounded-3xl overflow-hidden shadow-elegant">
-              <img src={images.workspace} alt="Our workspace in Hyderabad" loading="lazy"
+              <img src={images.workspace} alt="Indian professionals collaborating in a modern office environment" loading="lazy"
                 className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />
             </div>
@@ -79,8 +80,26 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
+      {/* Global Reach */}
       <section className="section-y bg-surface">
+        <div className="container-page">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="text-sm font-semibold uppercase tracking-widest text-primary">Global reach</div>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">
+              Serving students across key global markets
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              We help freshers build hire-ready profiles for opportunities in the USA, UK, Ireland, and Germany.
+            </p>
+          </div>
+          <div className="mt-10">
+            <ServiceRegionsMap />
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="section-y">
         <div className="container-page">
           <div className="text-center max-w-2xl mx-auto">
             <div className="text-sm font-semibold uppercase tracking-widest text-primary">What we believe</div>
