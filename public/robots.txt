@@ -1,7 +1,12 @@
 User-agent: *
 Allow: /
+
+# Legal pages are available but excluded from search indexing
 Disallow: /privacy
 Disallow: /terms
 Disallow: /refund
+
+# Legacy dev tooling path — not a public page
+Disallow: /.tanstack
 
 Sitemap: https://vyrapath.com/sitemap.xml

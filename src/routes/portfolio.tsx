@@ -4,14 +4,12 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Layout, Linkedin, ExternalLink } from "lucide-react";
+import { buildPageHead, PAGE_SEO } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 export const Route = createFileRoute("/portfolio")({
-  head: () => ({
-    meta: [
-      { title: "Work Samples — VYRAPATH" },
-      { name: "description", content: "Sample resumes, portfolios and LinkedIn transformations we've built for students and freshers." },
-    ],
-  }),
+  head: () => buildPageHead(PAGE_SEO.work),
   component: PortfolioPage,
 });
 
@@ -27,11 +25,23 @@ const samples = [
 function PortfolioPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Work Samples", path: "/portfolio" }])} />
       <PageHero
         eyebrow="Work samples"
-        title={<>Real freshers. <span className="text-gradient">Real transformations.</span></>}
-        subtitle="A curated selection of the resumes, portfolios and profiles we've built. Sample content — real client work is under NDA."
+        title={<>Professional <span className="text-gradient">portfolio & resume</span> samples</>}
+        subtitle="Sample ATS-friendly resumes, portfolio sites, and LinkedIn profile transformations built for students and freshers. Real client work is under NDA — these illustrate our approach."
       />
+      <section className="section-y bg-surface">
+        <div className="container-page max-w-4xl text-center">
+          <h2 className="font-display text-3xl font-bold tracking-tight">Portfolio building for students and freshers</h2>
+          <p className="mt-4 text-muted-foreground">
+            A professional portfolio complements your resume by showing projects, case studies, and proof of skills. VyraPath builds responsive portfolio sites alongside{" "}
+            <Link to="/services" hash="digital-resume" className="text-primary hover:underline">ATS-friendly resume building</Link> and{" "}
+            <Link to="/services" hash="linkedin-optimization" className="text-primary hover:underline">LinkedIn profile optimization</Link>.
+          </p>
+        </div>
+      </section>
+
       <section className="section-y">
         <div className="container-page">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -60,8 +70,11 @@ function PortfolioPage() {
             ))}
           </div>
           <div className="mt-14 text-center">
-            <p className="text-muted-foreground">Want to see samples for your specific role?</p>
-            <Button asChild size="lg" className="mt-4"><Link to="/contact">Request samples</Link></Button>
+            <p className="text-muted-foreground">Want samples for your role or ready to start?</p>
+            <div className="mt-4 flex flex-wrap justify-center gap-3">
+              <Button asChild size="lg"><Link to="/contact">Request samples</Link></Button>
+              <Button asChild size="lg" variant="outline"><Link to="/services" hash="portfolio-building">Portfolio building services</Link></Button>
+            </div>
           </div>
         </div>
       </section>

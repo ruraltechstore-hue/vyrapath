@@ -7,30 +7,47 @@ import { Badge } from "@/components/ui/badge";
 import {
   Check, ArrowRight, FileCode2, FileText, LayoutDashboard, Award, Linkedin, Briefcase, Sparkles,
 } from "lucide-react";
+import { buildPageHead, PAGE_SEO } from "@/lib/seo";
+import { FaqSection } from "@/components/seo/FaqSection";
+import { servicesFaqs } from "@/data/faqs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, serviceSchema } from "@/lib/structured-data";
 
 const iconMap = { FileCode2, FileText, LayoutDashboard, Award, Linkedin, Briefcase, Sparkles } as const;
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Services — VYRAPATH" },
-      { name: "description", content: "Digital resumes, portfolios, LinkedIn optimization, IT certifications, job applications and more. Everything to become hire-ready." },
-    ],
-  }),
+  head: () => buildPageHead(PAGE_SEO.services),
   component: ServicesPage,
 });
 
 function ServicesPage() {
   return (
     <>
+      <JsonLd data={[serviceSchema(), breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }])]} />
       <PageHero
-        eyebrow="Services"
-        title={<>Pick the piece — or take the <span className="text-gradient">full path</span></>}
-        subtitle="Every service is designed to plug into the next. Buy one, or bundle them into a plan that gets you hire-ready end-to-end."
+        eyebrow="Career services"
+        title={<>Resume building & <span className="text-gradient">career support for freshers</span></>}
+        subtitle="Professional resume building, ATS-friendly digital resumes, LinkedIn optimization, portfolio building, IT certification guidance, and job application assistance — designed for students and early-career candidates."
       >
         <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90"><Link to="/pricing">See pricing</Link></Button>
-        <Button asChild size="lg" variant="outline"><Link to="/contact">Not sure? Talk to us</Link></Button>
+        <Button asChild size="lg" variant="outline"><Link to="/ats-checker">Check your ATS score</Link></Button>
       </PageHero>
+
+      <section className="section-y bg-surface">
+        <div className="container-page max-w-4xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight">ATS-friendly resumes vs. digital resumes</h2>
+          <p className="mt-4 text-muted-foreground">
+            A <strong className="text-foreground font-medium">traditional ATS resume</strong> focuses on clean formatting, standard headings, and keywords that applicant tracking systems can parse. A{" "}
+            <strong className="text-foreground font-medium">digital resume</strong> adds live links to your intro video, certifications, portfolio, and LinkedIn — useful when recruiters want more context in one document.
+          </p>
+          <p className="mt-4 text-muted-foreground">
+            VyraPath offers both formats, plus resume customization for specific job descriptions through our{" "}
+            <Link to="/services" hash="job-applications" className="text-primary hover:underline">job application assistance</Link> and{" "}
+            <Link to="/services" hash="resume-monthly-subscription" className="text-primary hover:underline">monthly resume subscription</Link>.
+            Before ordering, you can <Link to="/ats-checker" className="text-primary hover:underline">check your current ATS resume score</Link> for free.
+          </p>
+        </div>
+      </section>
 
       <section className="section-y">
         <div className="container-page space-y-8">
@@ -69,6 +86,16 @@ function ServicesPage() {
                       <Button asChild className="ml-auto">
                         <Link to="/contact">Get started <ArrowRight className="ml-1 h-4 w-4" /></Link>
                       </Button>
+                      {s.slug === "digital-resume" || s.slug === "resume-building" ? (
+                        <Button asChild variant="outline">
+                          <Link to="/ats-checker">Check ATS score</Link>
+                        </Button>
+                      ) : null}
+                      {s.slug === "portfolio-building" ? (
+                        <Button asChild variant="outline">
+                          <Link to="/portfolio">View samples</Link>
+                        </Button>
+                      ) : null}
                     </div>
                   </div>
                   <div className="relative bg-surface min-h-[240px] lg:min-h-full overflow-hidden border-t lg:border-t-0 lg:border-l border-border/60">
@@ -85,6 +112,12 @@ function ServicesPage() {
           })}
         </div>
       </section>
+
+      <FaqSection
+        title="Resume building services FAQ"
+        subtitle="Questions about ATS resumes, digital resumes, and fresher career support."
+        faqs={servicesFaqs}
+      />
     </>
   );
 }

@@ -7,22 +7,23 @@ import {
   ArrowRight, Sparkles, ClipboardCheck, MessageSquare, Rocket, Star, Mail,
   FileCode2, FileText, LayoutDashboard, Award, Linkedin, CheckCircle2, Briefcase,
 } from "lucide-react";
+import { buildPageHead, PAGE_SEO } from "@/lib/seo";
+import { FaqSection } from "@/components/seo/FaqSection";
+import { homeFaqs } from "@/data/faqs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 const iconMap = { FileCode2, FileText, LayoutDashboard, Award, Linkedin, Briefcase, Sparkles } as const;
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "VYRAPATH — Land Interviews, Not Just Apply" },
-      { name: "description", content: "Digital resumes, portfolios, LinkedIn optimization, IT certifications, and a real ATS score checker. 500+ interview schedules, 1,000+ students who got interview calls, messages and mails." },
-    ],
-  }),
+  head: () => buildPageHead(PAGE_SEO.home),
   component: Home,
 });
 
 function Home() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }])} />
       {/* HERO */}
       <section className="relative overflow-hidden bg-gradient-hero">
         <div className="absolute -top-24 left-1/2 -z-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-primary-glow/20 blur-3xl animate-orbit-pulse" />
@@ -45,19 +46,19 @@ function Home() {
               <Sparkles className="h-3.5 w-3.5 text-accent" />
               500+ interview schedules delivered
             </div>
-            <h1 className="mt-6 font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight animate-fade-in-up" style={{ animationDelay: "80ms" }}>
-              Your career, on a{" "}
-              <span className="text-gradient">clearer path</span>
+            <h1 className="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+              Land interviews, not just{" "}
+              <span className="text-gradient">applications</span>
             </h1>
             <p className="mt-6 max-w-xl mx-auto lg:mx-0 text-base sm:text-lg text-muted-foreground animate-fade-in-up" style={{ animationDelay: "160ms" }}>
-              Resumes recruiters actually open. Portfolios hiring managers remember. Profiles that get found. Built for students — mainly focused on freshers who are ready to work.
+              VyraPath helps students and freshers with professional resume building, a free ATS resume checker, LinkedIn profile optimization, portfolio building, IT certification guidance, and job application assistance.
             </p>
             <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-3 animate-fade-in-up" style={{ animationDelay: "240ms" }}>
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant">
                 <Link to="/pricing">Get started <ArrowRight className="ml-1 h-4 w-4" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link to="/ats-checker">Score my resume free</Link>
+                <Link to="/ats-checker">Check your ATS resume score</Link>
               </Button>
             </div>
             <div className="mt-8 flex items-center justify-center lg:justify-start gap-3 animate-fade-in-up" style={{ animationDelay: "320ms" }}>
@@ -126,18 +127,23 @@ function Home() {
           <div>
             <div className="text-sm font-semibold uppercase tracking-widest text-primary">Why VYRAPATH</div>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">
-              We don't hand you a template. We build you a hiring advantage.
+              Professional resume building, ATS checking, and career services
             </h2>
             <p className="mt-4 text-muted-foreground">
-              We've watched what actually converts applications into interview calls, messages and mails. That's what we build for you — every piece connected: resume, portfolio, LinkedIn, certifications.
+              VyraPath is a career support platform for students and freshers. We combine{" "}
+              <Link to="/services" hash="digital-resume" className="text-primary hover:underline">ATS-friendly resume building</Link>, a{" "}
+              <Link to="/ats-checker" className="text-primary hover:underline">free ATS score checker</Link>,{" "}
+              <Link to="/services" hash="linkedin-optimization" className="text-primary hover:underline">LinkedIn optimization</Link>, and{" "}
+              <Link to="/services" hash="portfolio-building" className="text-primary hover:underline">portfolio building</Link>{" "}
+              so your job applications are stronger from the first submit.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              { title: "ATS-first, human-second", body: "Every resume passes automated filters before it hits a recruiter's desk." },
-              { title: "Real portfolios, real projects", body: "Not just a PDF — a live URL you can share in your applications." },
-              { title: "Live-linked digital resumes", body: "Video intros, cert links, portfolio and LinkedIn built into one document." },
-              { title: "Honest, coaching-first", body: "We push back when copy is fluffy. Tighter wins interviews." },
+              { title: "ATS-first resume building", body: "Every resume uses parseable structure and role-relevant keywords so applicant tracking systems can read your experience." },
+              { title: "Free ATS resume checker", body: "Upload your resume and see an ATS compatibility score with category-level feedback before you apply." },
+              { title: "Digital & traditional resumes", body: "Choose a classic ATS-safe resume or a digital resume with live links to your portfolio, certs, and LinkedIn." },
+              { title: "Job application support", body: "Get help tailoring applications, building portfolios, and optimizing profiles — without guaranteed outcome claims." },
             ].map((f) => (
               <Card key={f.title} className="p-5">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
@@ -154,8 +160,10 @@ function Home() {
         <div className="container-page">
           <div className="max-w-2xl">
             <div className="text-sm font-semibold uppercase tracking-widest text-primary">Services</div>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">Everything you need to become hire-ready</h2>
-            <p className="mt-4 text-muted-foreground">Buy à la carte or bundle into a plan — start with the ATS checker if you want a free pulse-check.</p>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">Resume, portfolio, and career services for freshers</h2>
+            <p className="mt-4 text-muted-foreground">
+              Explore <Link to="/services" className="text-primary hover:underline">resume building services</Link>, LinkedIn optimization, IT certification guidance, and job application assistance — or start with our <Link to="/ats-checker" className="text-primary hover:underline">free ATS checker</Link>.
+            </p>
           </div>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => {
@@ -196,7 +204,7 @@ function Home() {
               { icon: ClipboardCheck, title: "Pick a service", body: "Choose à la carte or a plan.", img: images.step1, alt: "Indian fresher choosing a career service on laptop" },
               { icon: MessageSquare, title: "Quick intake call", body: "20-minute call, we get your story.", img: images.step2, alt: "Indian professional on a video intake call" },
               { icon: Sparkles, title: "We build & refine", body: "Draft in 3–5 days, you revise.", img: images.step3, alt: "Indian mentor and student reviewing a resume draft" },
-              { icon: Rocket, title: "You start applying", body: "Ship a profile recruiters open.", img: images.step4, alt: "Indian graduate applying to jobs on laptop" },
+              { icon: Rocket, title: "We start applying", body: "Ship a profile recruiters open.", img: images.step4, alt: "Indian graduate applying to jobs on laptop" },
             ].map((step, i) => (
               <Card key={step.title} className="p-0 overflow-hidden h-full group hover:-translate-y-1 hover:shadow-elegant transition-all">
                 <div className="relative aspect-[16/10] overflow-hidden">
@@ -248,7 +256,9 @@ function Home() {
             <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-primary-glow/40 blur-3xl" />
             <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-accent/30 blur-3xl" />
             <h2 className="relative font-display text-3xl sm:text-5xl font-bold tracking-tight">Ready to stop guessing?</h2>
-            <p className="relative mx-auto mt-4 max-w-xl text-primary-foreground/80">Start with a free ATS check, or jump straight into a plan built for early-career candidates.</p>
+            <p className="relative mx-auto mt-4 max-w-xl text-primary-foreground/80">
+              Start with a <Link to="/ats-checker" className="underline underline-offset-2 hover:text-primary-foreground">free ATS resume check</Link>, explore <Link to="/services" className="underline underline-offset-2 hover:text-primary-foreground">resume building services</Link>, or view <Link to="/pricing" className="underline underline-offset-2 hover:text-primary-foreground">career packages</Link> for freshers.
+            </p>
             <div className="relative mt-8 flex flex-wrap justify-center gap-3">
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
                 <Link to="/pricing">See pricing</Link>
@@ -260,6 +270,27 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <section className="section-y bg-surface">
+        <div className="container-page">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <div className="text-sm font-semibold uppercase tracking-widest text-primary">Resources</div>
+              <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">Career guides for job search & ATS resumes</h2>
+              <p className="mt-3 text-muted-foreground max-w-2xl">
+                Practical articles on ATS-friendly resumes, LinkedIn optimization, portfolio building, and applying as a fresher.
+              </p>
+            </div>
+            <Button asChild variant="outline"><Link to="/blog">Browse all guides <ArrowRight className="ml-1 h-4 w-4" /></Link></Button>
+          </div>
+        </div>
+      </section>
+
+      <FaqSection
+        title="Resume & career services FAQ"
+        subtitle="Common questions about ATS resumes, our checker, and fresher career support."
+        faqs={homeFaqs}
+      />
     </>
   );
 }

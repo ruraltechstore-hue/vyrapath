@@ -5,14 +5,12 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { stats, images } from "@/data/site";
 import { Target, Heart, Compass, Users, Trophy, Sparkles } from "lucide-react";
+import { buildPageHead, PAGE_SEO } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Us — VYRAPATH" },
-      { name: "description", content: "VYRAPATH helps students — mainly focused on freshers — turn applications into interview calls, messages and mails." },
-    ],
-  }),
+  head: () => buildPageHead(PAGE_SEO.about),
   component: AboutPage,
 });
 
@@ -33,10 +31,11 @@ const timeline = [
 function AboutPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])} />
       <PageHero
-        eyebrow="About VYRAPATH"
-        title={<>On the path to <span className="text-gradient">your first serious role</span></>}
-        subtitle="We started as a two-person team helping students at one campus. Today we've helped over a thousand students — mainly freshers — get interview calls, messages and mails."
+        eyebrow="About VyraPath"
+        title={<>Career support for <span className="text-gradient">students & freshers</span></>}
+        subtitle="VyraPath is a career support platform helping students and freshers with ATS-friendly resumes, resume building, ATS checking, professional portfolios, LinkedIn optimization, IT certification support, and job application assistance."
       />
 
       {/* Mission */}

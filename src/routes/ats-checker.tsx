@@ -11,14 +11,14 @@ import {
 } from "lucide-react";
 import { scoreResume, type ScoreResult } from "@/lib/ats-scorer";
 import { cn } from "@/lib/utils";
+import { buildPageHead, PAGE_SEO } from "@/lib/seo";
+import { FaqSection } from "@/components/seo/FaqSection";
+import { atsCheckerFaqs } from "@/data/faqs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 export const Route = createFileRoute("/ats-checker")({
-  head: () => ({
-    meta: [
-      { title: "ATS Resume Score Checker — VYRAPATH" },
-      { name: "description", content: "Check your resume against the VYRAPATH ATS optimization methodology. Get a score, category breakdown and improvement suggestions." },
-    ],
-  }),
+  head: () => buildPageHead(PAGE_SEO.atsChecker),
   component: AtsPage,
 });
 
@@ -100,10 +100,11 @@ function AtsPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "ATS Checker", path: "/ats-checker" }])} />
       <PageHero
-        eyebrow="Free tool"
-        title={<>Check your <span className="text-gradient">ATS score</span></>}
-        subtitle="Upload your resume and get a compatibility score against the VYRAPATH optimization methodology, with a full category breakdown."
+        eyebrow="Free ATS resume checker"
+        title={<>Free <span className="text-gradient">ATS resume score</span> checker</>}
+        subtitle="Upload your resume and get an instant ATS compatibility score with a category breakdown. Check your resume before applying for jobs — processed locally in your browser."
       />
 
       <section className="section-y">
@@ -166,6 +167,46 @@ function AtsPage() {
           </div>
         </div>
       </section>
+
+      <section className="section-y bg-surface">
+        <div className="container-page max-w-4xl space-y-12">
+          <div>
+            <h2 className="font-display text-3xl font-bold tracking-tight">What is an ATS resume checker?</h2>
+            <p className="mt-4 text-muted-foreground">
+              An ATS resume checker evaluates how well your resume can be read by applicant tracking systems — software many employers use to filter applications before a recruiter reviews them. It looks at formatting, structure, and keyword signals that affect whether your resume is stored and matched to open roles.
+            </p>
+          </div>
+          <div>
+            <h2 className="font-display text-3xl font-bold tracking-tight">How does an ATS resume score work?</h2>
+            <p className="mt-4 text-muted-foreground">
+              VyraPath scores your resume across categories such as parseability, section structure, and keyword alignment. Each category contributes to an overall compatibility score out of 100. The score reflects how well your file follows common ATS-friendly practices — not a guarantee of any employer's specific system.
+            </p>
+          </div>
+          <div>
+            <h2 className="font-display text-3xl font-bold tracking-tight">How to improve your resume for ATS systems</h2>
+            <p className="mt-4 text-muted-foreground">
+              Use a single-column layout, standard headings, and text-selectable PDF or DOCX files. Mirror keywords from your target job description where they honestly reflect your skills. Remove graphics that replace text, and run your updated file through the checker again after edits.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              Need a resume built for ATS from the start? Explore our{" "}
+              <Link to="/services" hash="digital-resume" className="text-primary hover:underline">ATS-friendly resume building services</Link> or read our guide on{" "}
+              <Link to="/blog/how-to-create-ats-friendly-resume" className="text-primary hover:underline">how to create an ATS-friendly resume</Link>.
+            </p>
+          </div>
+          <div>
+            <h2 className="font-display text-3xl font-bold tracking-tight">Check your resume before applying for jobs</h2>
+            <p className="mt-4 text-muted-foreground">
+              A quick ATS compatibility check can reveal formatting issues and missing keyword signals before you submit applications. VyraPath's checker is free, requires no signup, and runs entirely in your browser.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <FaqSection
+        title="ATS checker FAQ"
+        subtitle="Common questions about resume ATS scores and compatibility checking."
+        faqs={atsCheckerFaqs}
+      />
     </>
   );
 }

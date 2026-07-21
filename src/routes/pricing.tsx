@@ -5,24 +5,23 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { buildPageHead, PAGE_SEO } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 export const Route = createFileRoute("/pricing")({
-  head: () => ({
-    meta: [
-      { title: "Pricing — VYRAPATH" },
-      { name: "description", content: "Transparent pricing. À la carte services from $15 or bundled plans starting at $229." },
-    ],
-  }),
+  head: () => buildPageHead(PAGE_SEO.pricing),
   component: PricingPage,
 });
 
 function PricingPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])} />
       <PageHero
         eyebrow="Pricing"
-        title={<>Fair prices. <span className="text-gradient">No surprises.</span></>}
-        subtitle="Pay for exactly what you need, or bundle into a plan for the best value."
+        title={<>Resume & career service <span className="text-gradient">pricing</span></>}
+        subtitle="Transparent pricing for ATS-friendly resume building, LinkedIn optimization, portfolio services, and job application support. Pay à la carte or bundle into a fresher career package."
       />
 
       {/* PLANS */}
@@ -122,7 +121,10 @@ function PricingPage() {
               </tbody>
             </table>
           </Card>
-          <p className="mt-4 text-center text-xs text-muted-foreground">Prices in USD. Local billing available on request.</p>
+          <p className="mt-4 text-center text-sm text-muted-foreground max-w-2xl mx-auto">
+            Not sure which option fits? <Link to="/ats-checker" className="text-primary hover:underline">Check your ATS resume score</Link> for free, or <Link to="/contact" className="text-primary hover:underline">talk to our team</Link> about resume building services for freshers.
+          </p>
+          <p className="mt-2 text-center text-xs text-muted-foreground">Prices in USD. Local billing available on request.</p>
         </div>
       </section>
     </>

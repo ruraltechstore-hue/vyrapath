@@ -14,6 +14,9 @@ import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { Toaster } from "@/components/ui/sonner";
 import { Chatbot } from "@/components/layout/Chatbot";
+import { buildRootHead } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/structured-data";
 
 function NotFoundComponent() {
   return (
@@ -76,26 +79,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VYRAPATH — Career Services Mainly Focused on Freshers" },
-      { name: "description", content: "500+ interview schedules delivered. VYRAPATH helps students — mainly focused on freshers — get interview calls, messages and mails. Digital resumes, portfolios, LinkedIn optimization, IT certifications and an honest ATS score checker." },
-      { name: "author", content: "VYRAPATH" },
-      { property: "og:title", content: "VYRAPATH — Career Services Mainly Focused on Freshers" },
-      { property: "og:description", content: "Digital resumes, portfolios, LinkedIn optimization built to land interviews." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [
-      { rel: "icon", href: "/favicon.ico", sizes: "any" },
-      { rel: "icon", href: "/favicon.png", type: "image/png", sizes: "32x32" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" },
-    ],
-  }),
+  head: () => buildRootHead(),
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
@@ -107,6 +91,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <HeadContent />
+      <JsonLd data={[organizationSchema(), websiteSchema()]} />
       <div className="flex min-h-screen flex-col">
         <Navbar />
         <main className="flex-1">

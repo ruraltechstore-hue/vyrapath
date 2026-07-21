@@ -1,12 +1,23 @@
+<IfModule mod_mime.c>
+  AddType application/xml .xml
+  AddType text/plain .txt
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "^(sitemap\.xml)$">
+    Header set Content-Type "application/xml; charset=utf-8"
+  </FilesMatch>
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # Serve existing files and directories as-is
+  # Serve real files and directories as static assets (sitemap.xml, robots.txt, etc.)
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # SPA fallback — route all other requests to index.html
+  # SPA fallback — only for routes that are not real files
   RewriteRule ^ index.html [L]
 </IfModule>

@@ -18,14 +18,12 @@ import {
   Loader2, CheckCircle2, Send, Sparkles, Trophy,
 } from "lucide-react";
 import { contactFaqs, domains, images } from "@/data/site";
+import { buildPageHead, PAGE_SEO } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — VYRAPATH" },
-      { name: "description", content: "Talk to our team. We reply within 24 hours." },
-    ],
-  }),
+  head: () => buildPageHead(PAGE_SEO.contact),
   component: ContactPage,
 });
 
@@ -115,6 +113,7 @@ function ContactPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])} />
       {/* HERO */}
       <section className="relative overflow-hidden bg-primary text-primary-foreground">
         <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-primary-glow/40 blur-3xl animate-orbit-pulse" />
@@ -123,11 +122,11 @@ function ContactPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-1 text-xs font-medium">
             <Sparkles className="h-3.5 w-3.5 text-accent" /> We reply within 24 hours
           </div>
-          <h1 className="mx-auto mt-6 max-w-3xl font-display text-4xl sm:text-6xl font-bold tracking-tight">
-            Let's get you <span className="text-accent">interview-ready</span> — talk to our team
+          <h1 className="mx-auto mt-6 max-w-3xl font-display text-4xl sm:text-5xl font-bold tracking-tight">
+            Contact VyraPath for <span className="text-accent">resume & career support</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-primary-foreground/80 text-lg">
-            Tell us where you're stuck. We'll come back with a plan tailored to your role, timeline and budget.
+            Ask about ATS-friendly resume building, LinkedIn optimization, portfolio services, or job application assistance. We reply within 24 hours.
           </p>
         </div>
       </section>
