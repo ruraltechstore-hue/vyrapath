@@ -100,16 +100,6 @@ export function Footer() {
             © {new Date().getFullYear()} VYRAPATH. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
-            {[Linkedin, Instagram, Twitter, Youtube].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="grid h-9 w-9 place-items-center rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors"
-                aria-label="social"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
           </div>
         </div>
       </div>

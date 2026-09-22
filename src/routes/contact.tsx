@@ -235,13 +235,6 @@ function ContactPage() {
                 ))}
                 <InfoRow icon={MapPin} label="Office" value={contactInfo.address} />
               </div>
-              <div className="mt-6 pt-6 border-t border-primary-foreground/20 flex gap-2">
-                {[Linkedin, Instagram, Twitter].map((Icon, i) => (
-                  <a key={i} href="#" className="grid h-10 w-10 place-items-center rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors" aria-label="social">
-                    <Icon className="h-4 w-4" />
-                  </a>
-                ))}
-              </div>
             </Card>
 
             <Card className="p-6">
@@ -270,7 +263,7 @@ function ContactPage() {
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div className="mt-4 font-display font-bold">VYRAPATH HQ</div>
-                <div className="text-sm text-muted-foreground">Madhapur, Hyderabad</div>
+                <div className="text-sm text-muted-foreground">Hyderabad, Telangana</div>
               </div>
             </div>
           </Card>

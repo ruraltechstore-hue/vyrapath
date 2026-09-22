@@ -31,8 +31,8 @@ export const images = {
 
 export const contactInfo = {
   emails: ["support@vyrapath.com", "hr@vyrapath.com"] as const,
-  phones: ["+91 63019 87060", "+91 79974 74891"] as const,
-  address: "Madhapur, Hyderabad",
+  phones: ["+91 9392207839"] as const,
+  address: "Hyderabad, Telangana",
 };
 
 export const serviceRegions = [

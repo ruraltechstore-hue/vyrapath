@@ -20,9 +20,9 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/75 backdrop-blur-xl">
-      <div className="container-page flex h-16 items-center justify-between gap-6">
+      <div className="container-page flex h-24 items-center justify-between gap-6">
         <Link to="/" className="flex items-center group shrink-0" onClick={() => setOpen(false)}>
-          <BrandLogo size="md" />
+          <BrandLogo size="lg" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
